@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensajería Abogado - LegalConsult</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">LegalConsult</div>
+        <nav class="nav">
+            <a href="../index.html">Inicio</a>
+            <a href="./dashboard_abogado.html">Dashboard</a>
+            <a href="../login.html">Cerrar Sesión</a>
+        </nav>
+    </header>
+
+    <main class="dashboard">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="dashboard_abogado.html">Casos Asignados</a></li>
+                <li><a href="calendario_abogado.html">Calendario</a></li>
+                <li><a href="mensajeria_abogado.html" class="active">Mensajería</a></li>
+                <li><a href="reportes_abogado.html">Reportes</a></li>
+                <li><a href="evaluaciones_abogado.html">Evaluaciones</a></li>
+            </ul>
+        </aside>
+
+        <section class="content">
+            <h1>Mensajería</h1>
+            <p>Comunícate con tus clientes sobre los casos asignados.</p>
+
+            <div class="message-list">
+                <div class="message">
+                    <p><strong>Juan Pérez:</strong> ¿Puedes revisar los nuevos documentos que envié?</p>
+                </div>
+                <div class="message">
+                    <p><strong>Laura Gómez:</strong> Sí, los revisaré hoy. Gracias.</p>
+                </div>
+            </div>
+
+            <form class="message-form">
+                <textarea placeholder="Escribe tu mensaje aquí..."></textarea>
+                <button type="submit" class="btn primary">Enviar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 LegalConsult. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
