@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progreso de Casos - LegalConsult</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">LegalConsult</div>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="#">Mi Perfil</a>
+            <a href="#">Cerrar Sesión</a>
+        </nav>
+    </header>
+
+    <main class="dashboard">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="dashboard_cliente.html">Consultas Activas</a></li>
+                <li><a href="progreso.html" class="active">Progreso de Casos</a></li>
+                <li><a href="mensajeria.html">Mensajería</a></li>
+                <li><a href="reportes.html">Reportes</a></li>
+                <li><a href="evaluaciones.html">Evaluaciones</a></li>
+            </ul>
+        </aside>
+
+        <section class="content">
+            <h1>Progreso de Casos</h1>
+            <p>Aquí puedes revisar el estado detallado de tus casos legales.</p>
+
+            <div class="progress-cards">
+                <div class="progress-card">
+                    <h3>Consulta #1234</h3>
+                    <p><strong>Estado:</strong> En Progreso</p>
+                    <p><strong>Última Actualización:</strong> 18/11/2024</p>
+                    <progress value="60" max="100"></progress>
+                </div>
+                <div class="progress-card">
+                    <h3>Consulta #5678</h3>
+                    <p><strong>Estado:</strong> Pendiente</p>
+                    <p><strong>Última Actualización:</strong> N/A</p>
+                    <progress value="0" max="100"></progress>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2024 LegalConsult. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
