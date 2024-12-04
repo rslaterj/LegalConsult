@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const amqp = require('amqplib/callback_api');
 const app = express();
 const port = 3000;
 
+app.use(cors()); // Permitir todas las solicitudes CORS
 app.use(express.json());
 
 app.post('/addUser', (req, res) => {
