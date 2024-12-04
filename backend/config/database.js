@@ -14,7 +14,8 @@ const sequelize = new Sequelize('legalconsult', 'root', '12345', {
 
     // Importar modelos
     const User = require('../models/user').User;
-    const Consulta = require('../models/consulta');
+    const Consulta = require('../models/consulta').Consulta;
+    const Mensaje = require('../models/mensaje');
 
     // Sincronizar modelos
     await sequelize.sync({ force: false });

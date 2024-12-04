@@ -10,11 +10,13 @@ app.post('/addUser', (req, res) => {
 
   amqp.connect('amqp://guest:guest@localhost', (error0, connection) => {
     if (error0) {
-      throw error0;
+      console.error('Error connecting to RabbitMQ:', error0);
+      return res.status(500).send('Failed to connect to RabbitMQ');
     }
     connection.createChannel((error1, channel) => {
       if (error1) {
-        throw error1;
+        console.error('Error creating channel:', error1);
+        return res.status(500).send('Failed to create channel');
       }
 
       const queue = 'userQueue';
@@ -27,6 +29,62 @@ app.post('/addUser', (req, res) => {
       channel.sendToQueue(queue, Buffer.from(msg));
       console.log(`Sent ${msg}`);
       res.send('User added to queue');
+    });
+  });
+});
+
+app.post('/addConsulta', (req, res) => {
+  const consulta = req.body;
+
+  amqp.connect('amqp://guest:guest@localhost', (error0, connection) => {
+    if (error0) {
+      console.error('Error connecting to RabbitMQ:', error0);
+      return res.status(500).send('Failed to connect to RabbitMQ');
+    }
+    connection.createChannel((error1, channel) => {
+      if (error1) {
+        console.error('Error creating channel:', error1);
+        return res.status(500).send('Failed to create channel');
+      }
+
+      const queue = 'consultaQueue';
+      const msg = JSON.stringify(consulta);
+
+      channel.assertQueue(queue, {
+        durable: false
+      });
+
+      channel.sendToQueue(queue, Buffer.from(msg));
+      console.log(`Sent ${msg}`);
+      res.send('Consulta added to queue');
+    });
+  });
+});
+
+app.post('/addMensaje', (req, res) => {
+  const mensaje = req.body;
+
+  amqp.connect('amqp://guest:guest@localhost', (error0, connection) => {
+    if (error0) {
+      console.error('Error connecting to RabbitMQ:', error0);
+      return res.status(500).send('Failed to connect to RabbitMQ');
+    }
+    connection.createChannel((error1, channel) => {
+      if (error1) {
+        console.error('Error creating channel:', error1);
+        return res.status(500).send('Failed to create channel');
+      }
+
+      const queue = 'mensajeQueue';
+      const msg = JSON.stringify(mensaje);
+
+      channel.assertQueue(queue, {
+        durable: false
+      });
+
+      channel.sendToQueue(queue, Buffer.from(msg));
+      console.log(`Sent ${msg}`);
+      res.send('Mensaje added to queue');
     });
   });
 });

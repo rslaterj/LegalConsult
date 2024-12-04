@@ -33,4 +33,4 @@ const Consulta = sequelize.define('Consulta', {
   timestamps: false
 });
 
-module.exports = Consulta;
+module.exports = { Consulta };
