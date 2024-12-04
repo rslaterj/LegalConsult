@@ -17,6 +17,8 @@ amqp.connect('amqp://guest:guest@localhost', (error0, connection) => {
     const userQueue = 'userQueue';
     const consultaQueue = 'consultaQueue';
     const mensajeQueue = 'mensajeQueue';
+    const loginQueue = 'loginQueue';
+    const userRoleQueue = 'userRoleQueue';
 
     channel.assertQueue(userQueue, {
       durable: false
@@ -30,7 +32,15 @@ amqp.connect('amqp://guest:guest@localhost', (error0, connection) => {
       durable: false
     });
 
-    console.log(`Waiting for messages in ${userQueue}, ${consultaQueue}, and ${mensajeQueue}. To exit press CTRL+C`);
+    channel.assertQueue(loginQueue, {
+      durable: false
+    });
+
+    channel.assertQueue(userRoleQueue, {
+      durable: false
+    });
+
+    console.log(`Waiting for messages in ${userQueue}, ${consultaQueue}, ${mensajeQueue}, and ${loginQueue}. To exit press CTRL+C`);
 
     channel.consume(userQueue, async (msg) => {
       console.log(`Received ${msg.content.toString()}`);
@@ -69,6 +79,38 @@ amqp.connect('amqp://guest:guest@localhost', (error0, connection) => {
         console.log('Mensaje added to database');
       } catch (error) {
         console.error('Error adding mensaje to database:', error);
+      }
+    }, {
+      noAck: true
+    });
+
+    channel.consume(loginQueue, async (msg) => {
+      console.log(`Received ${msg.content.toString()}`);
+      const { email, password } = JSON.parse(msg.content.toString());
+
+      try {
+        const user = await User.findOne({ where: { email, password } });
+        if (user) {
+          console.log('User authenticated successfully');
+        } else {
+          console.log('Authentication failed');
+        }
+      } catch (error) {
+        console.error('Error during authentication:', error);
+      }
+    }, {
+      noAck: true
+    });
+
+    channel.consume(userRoleQueue, async (msg) => {
+      console.log(`Received ${msg.content.toString()}`);
+      const { userId } = JSON.parse(msg.content.toString());
+
+      try {
+        const userRole = await getUserRole(userId);
+        console.log(`User role for userId ${userId}: ${userRole}`);
+      } catch (error) {
+        console.error('Error getting user role:', error);
       }
     }, {
       noAck: true
